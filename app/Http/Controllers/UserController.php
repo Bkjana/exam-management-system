@@ -24,6 +24,7 @@ class UserController extends Controller
             'role'=>'required',
             'password'=>'required',
         ]);
+
         $user=$this->userRepoInterface->loginCheck($request);
         if(count($user)>=1){
             if($user[0]->role=='admin'){

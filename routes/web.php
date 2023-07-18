@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\UserController;
 
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\StudentMiddleware;
+use App\Http\Middleware\TeacherMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,18 +24,19 @@ Route::get('/register',[UserController::class,'register']);
 Route::post('/register',[UserController::class,'registerSave']);
 
 
-Route::prefix('student')->group(function () {
-    Route::view("/","student.index");
+
+Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
+    Route::view("/","admin.index");
 });
 
 
-Route::prefix('teacher')->group(function () {
+Route::group(['prefix'=>'teacher','middleware'=>['teacher']],function () {
     Route::view("/","teacher.index");
     
 });
 
 
-Route::prefix('admin')->group(function () {
-    Route::view("/","admin.index");
+Route::group(['prefix'=>'student','middleware'=>['student']],function () {
+    Route::view("/","student.index");
     
 });
