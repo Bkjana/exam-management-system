@@ -5,6 +5,6 @@
 @endpush
 
 @section('main-section')
-    <x-navbar homeLink="/admin" subjectLink="/admin/subject" examLink="/admin/exam" logoutLink="/admin/logout" />
+    <x-navbar homeName="{{session('admin')->name}}" homeLink="/admin" subjectLink="/admin/subject" examLink="/admin/exam" logoutLink="/admin/logout" />
     <h1>Admin Page</h1>
 @endsection

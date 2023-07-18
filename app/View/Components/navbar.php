@@ -12,13 +12,15 @@ class navbar extends Component
      * Create a new component instance.
      */
 
+    public $homeName;
     public $homeLink;
     public $subjectLink;
     public $examLink;
     public $logoutLink;
 
-    public function __construct($homeLink, $subjectLink, $examLink, $logoutLink)
+    public function __construct($homeName, $homeLink, $subjectLink, $examLink, $logoutLink)
     {
+        $this->homeName = $homeName;
         $this->homeLink = $homeLink;
         $this->subjectLink = $subjectLink;
         $this->examLink = $examLink;

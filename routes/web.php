@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 
 use App\Http\Middleware\AdminMiddleware;
@@ -26,17 +29,21 @@ Route::post('/register',[UserController::class,'registerSave']);
 
 
 Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
-    Route::view("/","admin.index");
+    Route::get("/",[AdminController::class,'index']);
+    Route::get('/logout',[AdminController::class,'logout']);
+    
 });
 
 
 Route::group(['prefix'=>'teacher','middleware'=>['teacher']],function () {
-    Route::view("/","teacher.index");
+    Route::get("/",[TeacherController::class,'index']);
+    Route::get('/logout',[TeacherController::class,'logout']);
     
 });
 
 
 Route::group(['prefix'=>'student','middleware'=>['student']],function () {
-    Route::view("/","student.index");
+    Route::get("/",[StudentController::class,'index']);
+    Route::get('/logout',[StudentController::class,'logout']);
     
 });
