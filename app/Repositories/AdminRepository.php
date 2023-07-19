@@ -8,10 +8,52 @@ use App\Models\User;
 
 class AdminRepository implements AdminRepoInterface
 {
+    public function index(){
+        $arr=[];
+        $arr['total_student'] = User::where('role','student')
+                                ->count();
+        $arr['total_teacher'] = User::where('role','teacher')
+                                ->count();
+        $arr['total_subject'] = Subject::count();
+        $arr['total_exam'] = Exam::count();
+        return $arr;
+    }
+
+
+
+
     public function getAllStudentWithNumberOfSubjectAndExam() {
         return User::where('role','student')
         ->withCount(['exam','subject'],)->get();
     }
+    public function getAllStudentFromTrashed() {
+        return User::onlyTrashed()
+        ->where('role','student')
+        ->withCount(['exam','subject'],)->get();
+    }
+    public function studentDelete($id){
+        $student=User::find($id);
+        if(!is_null($student) && $student->role=="student"){
+            $student->delete();
+        }
+    }
+    public function studentRestore($id){
+        $student=User::withTrashed()->find($id);
+        if($student->trashed()){
+            $student->restore();
+        }
+    }
+
+    public function studentPermanentDelete($id){
+        $student=User::withTrashed()->find($id);
+        if($student->trashed()){
+            $student->forceDelete();
+        }
+    }
+
+
+
+    
 
     public function getAllTeacherWithNumberOfSubjectAssign(){
         return User::where('role','teacher')

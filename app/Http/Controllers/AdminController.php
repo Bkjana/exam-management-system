@@ -18,36 +18,57 @@ class AdminController extends Controller
 
 
     function index() {
-        $arr=[];
-        $arr['total_student'] = User::where('role','student')
-                                ->count();
-        $arr['total_teacher'] = User::where('role','teacher')
-                                ->count();
-        $arr['total_subject'] = Subject::count();
-        $arr['total_exam'] = Exam::count();
-        
+        $arr=$this->adminRepoInterface->index();       
         return view("admin.index",['count'=>$arr]);
     }
-
     function logout() {
         session()->remove('admin');
         return view("login");
     }
 
+
+
+
     function studentView() {
         $students = $this->adminRepoInterface->getAllStudentWithNumberOfSubjectAndExam();
         return view('admin.student',['students'=>$students]);
     }
+    function studentViewPast() {
+        $students = $this->adminRepoInterface->getAllStudentFromTrashed();
+        return view('admin.student',["students"=>$students,"past"=>"true"]);
+    }
+    function studentDelete($id){
+        $this->adminRepoInterface->studentDelete($id);
+        return redirect("/admin/student");
+    }
+    function studentRestore($id){
+        $this->adminRepoInterface->studentRestore($id);
+        return redirect("/admin/student/past");
+    }
+    function studentPermanentDelete($id){
+        $this->adminRepoInterface->studentPermanentDelete($id);
+        return redirect("/admin/student/past");
+    }
+
+
+
+
+    function subjectView() {
+        $subjects = $this->adminRepoInterface->getAllSubjectWithNumberOfStudent();        
+        return view('admin.subject',["subjects"=>$subjects]);
+    }
+
+
+
+
+
+
 
     function teacherView(){
         $teachers = $this->adminRepoInterface->getAllTeacherWithNumberOfSubjectAssign();
         return view('admin.teacher',['teachers'=>$teachers]);
     }
 
-    function subjectView() {
-        $subjects = $this->adminRepoInterface->getAllSubjectWithNumberOfStudent();        
-        return view('admin.subject',["subjects"=>$subjects]);
-    }
 
     function examView() {
         $exams = $this->adminRepoInterface->getAllExamWithNumberOfStudent();

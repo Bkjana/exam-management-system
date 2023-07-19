@@ -7,6 +7,7 @@
 @section('main-section')
 <x-navbar homeName="{{session('admin')->name}}" homeLink="/admin" subjectLink="/admin/subject" examLink="/admin/exam" logoutLink="/admin/logout" />
     <h1 class="text-center">All Students</h1>
+    <a href="/admin/student/past" class="btn btn-outline-info">Show Past Student</a>
     <table class="table table-striped text-center border">
 
         <thead>
@@ -32,10 +33,16 @@
                     <td>{{$student->address}}</td>
                     <td>{{$student->subject_count}}</td>
                     <td>{{$student->exam_count}}</td>
+                    @if (isset($past))    
                     <td class="d-flex">
-                      <a href="/admin/student/edit/{{$student->id}}" class="btn btn-outline-info">Edit</a>
+                      <a href="/admin/student/restore/{{$student->id}}" class="btn btn-outline-info">Restore</a>
+                      <a href="/admin/student/permanentdelete/{{$student->id}}" class="btn btn-outline-danger">Permanent Delete</a>
+                    </td>
+                    @else   
+                    <td class="d-flex">
                       <a href="/admin/student/delete/{{$student->id}}" class="btn btn-outline-danger">Delete</a>
                     </td>
+                    @endif
                     
                   </tr>
               @endforeach
