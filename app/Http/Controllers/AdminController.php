@@ -57,6 +57,35 @@ class AdminController extends Controller
         $subjects = $this->adminRepoInterface->getAllSubjectWithNumberOfStudent();        
         return view('admin.subject',["subjects"=>$subjects]);
     }
+    function subjectAdd(){
+        $teacher = $this->adminRepoInterface->getAllTeacher();
+        return view("admin.subjectSave",["teachers"=>$teacher]);
+    }
+    function subjectSave(Request $request){
+        $request->validate([
+            'subject'=>'required|unique:subjects',
+            'assign_teacher'=>'required|numeric|not_in:0'
+        ]);
+        $this->adminRepoInterface->saveSubject($request);
+        return redirect("/admin/subject");
+    }
+    function subjectEdit($id) {
+        $subject = $this->adminRepoInterface->getSubject($id);
+        $teachers = $this->adminRepoInterface->getAllTeacher();
+        return view("admin.subjectEdit",['subject'=>$subject, 'teachers'=>$teachers]);
+    }
+    function subjectEditSave(Request $request) {
+        $request->validate([
+            'subject'=>'required',
+            'assign_teacher'=>'required|numeric|not_in:0'
+        ]);
+        $this->adminRepoInterface->editSubject($request);
+        return redirect("/admin/subject");
+    }
+    function subjectDelete($id){
+        $this->adminRepoInterface->deleteSubject($id);
+        return redirect("/admin/subject");
+    }
 
 
 

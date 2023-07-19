@@ -40,9 +40,11 @@ Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
 
     Route::prefix("/subject")->group(function() {
         Route::get('/',[AdminController::class,'subjectView']);
+        Route::get('/add',[AdminController::class,'subjectAdd']);
+        Route::post('/add',[AdminController::class,'subjectSave']);
         Route::get('/edit/{id}',[AdminController::class,'subjectEdit']);
-        Route::post('/edit',[AdminController::class,'SubjectEditSave']);
-        Route::get('/delete/{id}',[AdminController::class],'subjectDelete');
+        Route::post('/edit',[AdminController::class,'subjectEditSave']);
+        Route::get('/delete/{id}',[AdminController::class,'subjectDelete']);
     });
 
 

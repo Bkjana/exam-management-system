@@ -5,6 +5,7 @@ use App\Models\Exam;
 use App\Models\Subject;
 use App\Repositories\Interfaces\AdminRepoInterface;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class AdminRepository implements AdminRepoInterface
 {
@@ -53,18 +54,48 @@ class AdminRepository implements AdminRepoInterface
 
 
 
-    
-
-    public function getAllTeacherWithNumberOfSubjectAssign(){
-        return User::where('role','teacher')
-        ->withCount('teacher')->get();
-    }
 
     public function getAllSubjectWithNumberOfStudent(){
         return Subject::withCount(['user as student_count' => function($q) {
             $q->where('role', 'student');
         },'exam'])->get();
     }
+    public function saveSubject(Request $request){
+        $subject = new Subject;
+        $subject->subject = $_POST['subject'];
+        $subject->assign_teacher = $_POST['assign_teacher'];
+        $subject->save();
+    }
+    function deleteSubject($id) {
+        $subject = Subject::find($id);
+        if(!is_null($subject)){
+            $subject->delete();
+        }
+    }
+    public function getSubject($id){
+        return Subject::find($id);
+    }
+    public function editSubject(Request $request){
+        $subject = Subject::find($_POST['id']);
+        $subject->subject = $_POST['subject'];
+        $subject->assign_teacher = $_POST['assign_teacher'];
+        $subject->save();
+    }
+
+
+
+
+
+
+
+    public function getAllTeacherWithNumberOfSubjectAssign(){
+        return User::where('role','teacher')
+        ->withCount('teacher')->get();
+    }
+    public function getAllTeacher(){
+        return User::where('role','teacher')->get();
+    }
+
 
     public function getAllExamWithNumberOfStudent() {
         return Exam::withCount([

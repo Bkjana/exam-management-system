@@ -7,6 +7,7 @@
 @section('main-section')
 <x-navbar homeName="{{session('admin')->name}}" homeLink="/admin" subjectLink="/admin/subject" examLink="/admin/exam" logoutLink="/admin/logout" />
     <h1 class="text-center">All Subjects</h1>
+    <a href="/admin/subject/add" class="btn btn-outline-primary mb-1">Add New Subject</a>
     <table class="table table-striped text-center border">
 
         <thead>

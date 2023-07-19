@@ -1,5 +1,6 @@
 <?php
 namespace App\Repositories\Interfaces;
+use Illuminate\Http\Request;
 
 interface AdminRepoInterface{
 
@@ -14,11 +15,18 @@ interface AdminRepoInterface{
     public function studentPermanentDelete($id);
 
 
-    
-
-    public function getAllTeacherWithNumberOfSubjectAssign();
 
     public function getAllSubjectWithNumberOfStudent();
+    public function saveSubject(Request $request);
+    public function deleteSubject($id);
+    public function getSubject($id);
+    public function editSubject(Request $request);
+
+
+
+    public function getAllTeacherWithNumberOfSubjectAssign();
+    public function getAllTeacher();
+
 
     public function getAllExamWithNumberOfStudent();
 }
