@@ -93,16 +93,54 @@ class AdminController extends Controller
 
 
 
+    function examView() {
+        $exams = $this->adminRepoInterface->getAllExamWithNumberOfStudent(); 
+        return view("admin.exam",["exams"=>$exams]);
+    }
+    function examAdd(){
+        $subject = $this->adminRepoInterface->getAllSubjectWithNumberOfStudent();
+        return view("admin.examSave",["subjects"=>$subject]);
+    }
+    function examSave(Request $request){
+        $request->validate([
+            'exam_name'=>'required|unique:exams',
+            'subject_id'=>'required|numeric|not_in:0',
+            'start_time'=>'required|date_format:Y-m-d\TH:i|after:now',
+            'end_time' => 'required|date_format:Y-m-d\TH:i|after:start_time',
+            'question_file' => 'required|mimes:pdf|max:2048',
+        ]);
+        $this->adminRepoInterface->saveExam($request);
+        return redirect("/admin/exam");
+    }
+    function examEdit($id) {
+        $subject = $this->adminRepoInterface->getAllSubjectWithNumberOfStudent();
+        $exam = $this->adminRepoInterface->getExam($id);
+        return view("admin.examEdit",['subjects'=>$subject, 'exam'=>$exam]);
+    }
+    function examEditSave(Request $request) {
+        $request->validate([
+            'exam_name'=>'required',
+            'subject_id'=>'required|numeric|not_in:0',
+            'start_time'=>'required|date_format:Y-m-d\TH:i|after:now',
+            'end_time' => 'required|date_format:Y-m-d\TH:i|after:start_time',
+            'question_file' => 'mimes:pdf|max:2048',
+        ]);
+        $this->adminRepoInterface->editExam($request);
+        return redirect("/admin/exam");
+    }
+    function examDelete($id){
+        $this->adminRepoInterface->deleteExam($id);
+        return redirect("/admin/exam");
+    }
+
+
+
+
+
     function teacherView(){
         $teachers = $this->adminRepoInterface->getAllTeacherWithNumberOfSubjectAssign();
         return view('admin.teacher',['teachers'=>$teachers]);
     }
 
 
-    function examView() {
-        $exams = $this->adminRepoInterface->getAllExamWithNumberOfStudent();
-        
-        return view("admin.exam",["exams"=>$exams]);
-
-    }
 }

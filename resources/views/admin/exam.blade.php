@@ -7,6 +7,7 @@
 @section('main-section')
 <x-navbar homeName="{{session('admin')->name}}" homeLink="/admin" subjectLink="/admin/subject" examLink="/admin/exam" logoutLink="/admin/logout" />
     <h1 class="text-center">All Exams</h1>
+    <a href="/admin/exam/add" class="btn btn-outline-primary mb-1">Add New Exam</a>
     <table class="table table-striped text-center border">
 
         <thead>
@@ -31,8 +32,8 @@
                     <td>{{$exam->start_time}}</td>
                     <td>{{$exam->end_time}}</td>
                     <td class="d-flex">
-                      <a href="/admin/subject/edit/{{$exam->id}}" class="btn btn-outline-info">Edit</a>
-                      <a href="/admin/subject/delete/{{$exam->id}}" class="btn btn-outline-danger">Delete</a>
+                      <a href="/admin/exam/edit/{{$exam->id}}" class="btn btn-outline-info">Edit</a>
+                      <a href="/admin/exam/delete/{{$exam->id}}" class="btn btn-outline-danger">Delete</a>
                     </td>
                     
                   </tr>

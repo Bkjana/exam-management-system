@@ -86,6 +86,47 @@ class AdminRepository implements AdminRepoInterface
 
 
 
+    public function getAllExamWithNumberOfStudent() {
+        return Exam::withCount([
+            'user as student_register'=>function($q){
+                $q->where('role','student');
+            }])->get();
+    }
+    public function saveExam(Request $request){
+        $exam = new Exam;
+        $exam->exam_name = $_POST['exam_name'];
+        $exam->subject_id = $_POST['subject_id'];
+        $exam->start_time = $_POST['start_time'];
+        $exam->end_time = $_POST['end_time'];
+        $exam->save();
+        $file_name="exam".$exam->id.".pdf";
+        $file = $request->file('question_file');
+        $file->storeAs('exam', $file_name,'public');
+    }
+    public function getExam($id){
+        return Exam::find($id);
+    }
+    public function editExam(Request $request){
+        $exam = Exam::find($_POST['id']);
+        $exam->exam_name = $_POST['exam_name'];
+        $exam->subject_id = $_POST['subject_id'];
+        $exam->start_time = $_POST['start_time'];
+        $exam->end_time = $_POST['end_time'];
+        $exam->save();
+        if($request->file('question_file')){
+            $file_name="exam".$exam->id.".pdf";
+            $file = $request->file('question_file');
+            $file->storeAs('exam', $file_name,'public');
+        }
+    }
+    public function deleteExam($id){
+        $exam = Exam::find($id);
+        if(!is_null($exam)){
+            $exam->delete();
+        }
+    }
+
+
 
 
     public function getAllTeacherWithNumberOfSubjectAssign(){
@@ -97,10 +138,4 @@ class AdminRepository implements AdminRepoInterface
     }
 
 
-    public function getAllExamWithNumberOfStudent() {
-        return Exam::withCount([
-            'user as student_register'=>function($q){
-                $q->where('role','student');
-            }])->get();
-    }
 }

@@ -32,11 +32,16 @@ Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
     Route::get("/",[AdminController::class,'index']);
     Route::get('/logout',[AdminController::class,'logout']);
 
-    Route::get('/student',[AdminController::class,'studentView']);
-    Route::get('/student/past',[AdminController::class,'studentViewPast']);
-    Route::get('/student/restore/{id}',[AdminController::class,'studentRestore']);
-    Route::get('/student/permanentdelete/{id}',[AdminController::class,'studentPermanentDelete']);
-    Route::get('/student/delete/{id}',[AdminController::class,'studentDelete']);
+
+
+    Route::prefix('/student')->group(function(){
+        Route::get('/',[AdminController::class,'studentView']);
+        Route::get('/past',[AdminController::class,'studentViewPast']);
+        Route::get('/restore/{id}',[AdminController::class,'studentRestore']);
+        Route::get('/permanentdelete/{id}',[AdminController::class,'studentPermanentDelete']);
+        Route::get('/delete/{id}',[AdminController::class,'studentDelete']);
+    });
+
 
     Route::prefix("/subject")->group(function() {
         Route::get('/',[AdminController::class,'subjectView']);
@@ -48,8 +53,18 @@ Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
     });
 
 
+    Route::prefix("/exam")->group(function() {
+        Route::get('/',[AdminController::class,'examView']);
+        Route::get('/add',[AdminController::class,'examAdd']);
+        Route::post('/add',[AdminController::class,'examSave']);
+        Route::get('/edit/{id}',[AdminController::class,'examEdit']);
+        Route::post('/edit',[AdminController::class,'examEditSave']);
+        Route::get('/delete/{id}',[AdminController::class,'examDelete']);
+    });
+
+
     Route::get('/teacher',[AdminController::class,'teacherView']);
-    Route::get('/exam',[AdminController::class,'examView']);
+
     
 });
 

@@ -24,9 +24,17 @@ interface AdminRepoInterface{
 
 
 
+    public function getAllExamWithNumberOfStudent();
+    public function saveExam(Request $request);
+    public function getExam($id);
+    public function editExam(Request $request);
+    public function deleteExam($id);
+
+
+
+
     public function getAllTeacherWithNumberOfSubjectAssign();
     public function getAllTeacher();
 
 
-    public function getAllExamWithNumberOfStudent();
 }
