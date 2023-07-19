@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 use Illuminate\Http\Request;
-use App\Models\User;
+
 
 
 interface UserRepoInterface{

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Subject extends Model
 {
@@ -17,10 +18,15 @@ class Subject extends Model
     ];
 
     function teacher() {
-        return $this->hasOne("user",'assign_teacher','id');
+        return $this->belongsTo(User::class,'assign_teacher','id');
+
     }
 
     function user() {
-        return $this->belongsToMany('user','student_subject','student_id','subject_id');
+        return $this->belongsToMany(User::class,'student_subject','subject_id','student_id');
+    }
+
+    function exam() {
+        return $this->hasMany(Exam::class,'subject_id','id');
     }
 }

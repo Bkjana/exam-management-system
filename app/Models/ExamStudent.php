@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ExamStudent extends Model
 {
     use HasFactory;
+    protected $table='exam_student';
+
+    protected $primaryKey='id';
 }

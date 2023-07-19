@@ -31,6 +31,10 @@ Route::post('/register',[UserController::class,'registerSave']);
 Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
     Route::get("/",[AdminController::class,'index']);
     Route::get('/logout',[AdminController::class,'logout']);
+    Route::get('/student',[AdminController::class,'studentView']);
+    Route::get('/teacher',[AdminController::class,'teacherView']);
+    Route::get('/subject',[AdminController::class,'subjectView']);
+    Route::get('/exam',[AdminController::class,'examView']);
     
 });
 
