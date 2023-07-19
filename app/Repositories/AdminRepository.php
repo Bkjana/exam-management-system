@@ -44,7 +44,6 @@ class AdminRepository implements AdminRepoInterface
             $student->restore();
         }
     }
-
     public function studentPermanentDelete($id){
         $student=User::withTrashed()->find($id);
         if($student->trashed()){
@@ -131,10 +130,48 @@ class AdminRepository implements AdminRepoInterface
 
     public function getAllTeacherWithNumberOfSubjectAssign(){
         return User::where('role','teacher')
+        ->where('name', 'not like', '%unverified%')
         ->withCount('teacher')->get();
     }
     public function getAllTeacher(){
-        return User::where('role','teacher')->get();
+        return User::where('role','teacher')
+        ->where('name', 'not like', '%unverified%')
+        ->get();
+    }
+    public function getAllTeacherFromTrashed() {
+        return User::onlyTrashed()
+        ->where('role','teacher')
+        ->where('name', 'not like', '%unverified%')
+        ->withCount('teacher')->get();
+    }
+    public function teacherDelete($id){
+        $teacher=User::find($id);
+        if(!is_null($teacher) && $teacher->role=="teacher"){
+            $teacher->delete();
+        }
+    }
+    public function teacherRestore($id){
+        $teacher=User::withTrashed()->find($id);
+        if($teacher->trashed()){
+            $teacher->restore();
+        }
+    }
+    public function teacherPermanentDelete($id){
+        $teacher=User::withTrashed()->find($id);
+        if($teacher->trashed()){
+            $teacher->forceDelete();
+        }
+    }
+    public function getTeacherWhoAreUnverified(){
+        return User::where('role','teacher')
+        ->where('name', 'like', '%unverified%')
+        ->get();
+    }
+
+    public function acceptTeacher($id){
+        $user = User::find($id);
+        $user->name = str_replace('unverified','',$user->name);
+        $user->save();
     }
 
 

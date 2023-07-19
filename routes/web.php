@@ -29,6 +29,8 @@ Route::post('/register',[UserController::class,'registerSave']);
 
 
 Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
+
+
     Route::get("/",[AdminController::class,'index']);
     Route::get('/logout',[AdminController::class,'logout']);
 
@@ -62,8 +64,16 @@ Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
         Route::get('/delete/{id}',[AdminController::class,'examDelete']);
     });
 
+    Route::prefix("/teacher")->group(function() {
+        Route::get('/',[AdminController::class,'teacherView']);
+        Route::get('/past',[AdminController::class,'teacherViewPast']);
+        Route::get('/restore/{id}',[AdminController::class,'teacherRestore']);
+        Route::get('/permanentdelete/{id}',[AdminController::class,'teacherPermanentDelete']);
+        Route::get('/delete/{id}',[AdminController::class,'teacherDelete']);
+        Route::get('/unverified',[AdminController::class,'teacherUnverified']);
+        Route::get('/accept/{id}',[AdminController::class,'teacherAccept']);
+    });
 
-    Route::get('/teacher',[AdminController::class,'teacherView']);
 
     
 });

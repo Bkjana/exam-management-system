@@ -7,7 +7,11 @@
 @section('main-section')
 <x-navbar homeName="{{session('admin')->name}}" homeLink="/admin" subjectLink="/admin/subject" examLink="/admin/exam" logoutLink="/admin/logout" />
     <h1 class="text-center">All Students</h1>
+    @if (isset($past))
+    <a href="/admin/student" class="btn btn-outline-info">Show All Student</a>
+    @else
     <a href="/admin/student/past" class="btn btn-outline-info">Show Past Student</a>
+    @endif
     <table class="table table-striped text-center border">
 
         <thead>

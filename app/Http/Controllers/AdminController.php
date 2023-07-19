@@ -137,9 +137,36 @@ class AdminController extends Controller
 
 
 
+
+
     function teacherView(){
         $teachers = $this->adminRepoInterface->getAllTeacherWithNumberOfSubjectAssign();
         return view('admin.teacher',['teachers'=>$teachers]);
+    }
+    function teacherViewPast() {
+        $teachers = $this->adminRepoInterface->getAllTeacherFromTrashed();
+        return view('admin.teacher',["teachers"=>$teachers,"past"=>"true"]);
+    }
+    function teacherDelete($id){
+        $this->adminRepoInterface->teacherDelete($id);
+        return redirect("/admin/teacher");
+    }
+    function teacherRestore($id){
+        $this->adminRepoInterface->teacherRestore($id);
+        return redirect("/admin/teacher/past");
+    }
+    function teacherPermanentDelete($id){
+        $this->adminRepoInterface->teacherPermanentDelete($id);
+        return redirect("/admin/teacher/past");
+    }
+    function teacherUnverified() {
+        $teachers = $this->adminRepoInterface->getTeacherWhoAreUnverified();
+        return view('admin.teacherUnverified',['teachers'=>$teachers]);
+    }
+
+    function teacherAccept($id){
+        $this->adminRepoInterface->acceptTeacher($id);
+        return redirect("/admin/teacher/unverified");
     }
 
 

@@ -35,6 +35,12 @@ interface AdminRepoInterface{
 
     public function getAllTeacherWithNumberOfSubjectAssign();
     public function getAllTeacher();
+    public function getAllTeacherFromTrashed();
+    public function teacherDelete($id);
+    public function teacherRestore($id);
+    public function teacherPermanentDelete($id);
+    public function getTeacherWhoAreUnverified();
+    public function acceptTeacher($id);
 
 
 }

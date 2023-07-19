@@ -18,6 +18,8 @@ class UserRepository implements UserRepoInterface
         $user->password= $_POST['password'];
         $user->save();
         if($_POST['role']=='teacher'){
+            $user->name = $_POST['name']." unverified";
+            $user->save();
             $file_name=$user->id.".pdf";
             $file = $request->file('file');
             $file->storeAs('pdfs', $file_name,'public');
@@ -30,12 +32,14 @@ class UserRepository implements UserRepoInterface
         $role=$_POST['role'];
         if (str_contains($emailormobile,'@')) {
             $user=User::where('email','=',$emailormobile)
+                        ->where('name', 'not like', '%unverified%')
                         ->where('password','=',$password)
                         ->where('role','=',$role)
                         ->get();
             // echo $user;
         }else{
             $user=User::where('mobile','=',$emailormobile)
+                        ->where('name', 'not like', '%unverified%')
                         ->where('password','=',$password)
                         ->where('role','=',$role)
                         ->get();
