@@ -82,7 +82,10 @@ Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
 Route::group(['prefix'=>'teacher','middleware'=>['teacher']],function () {
     Route::get("/",[TeacherController::class,'index']);
     Route::get('/logout',[TeacherController::class,'logout']);
-    
+    Route::get('/exam',[TeacherController::class,'examView']);
+    Route::post('/exam',[TeacherController::class,'examSave']);
+    Route::get('/subject',[TeacherController::class,'subject']);
+    Route::get('/viewAnswershet/{exam_id}',[TeacherController::class,'viewAnswershet']);
 });
 
 

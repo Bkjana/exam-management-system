@@ -15,7 +15,7 @@
         </div><div class="row m-3">     
             <x-card cardName="Subject" cardTitle="{{$count['total_subject']}}" cardDesc="Subject Are Added" cardLinkName="Go To Subject Portal" cardLink="/admin/subject"/>
 
-            <x-card cardName="Exam" cardTitle="{{$count['total_exam']}}" cardDesc="Exams Are Conducted" cardLinkName="Go To Exam Portal" cardLink="/admin/Exam"/>
+            <x-card cardName="Exam" cardTitle="{{$count['total_exam']}}" cardDesc="Exams Are Conducted" cardLinkName="Go To Exam Portal" cardLink="/admin/exam"/>
 
         </div>
 @endsection

@@ -10,18 +10,18 @@
 <div class="d-flex justify-content-between">
     <div class="scrollable-container">
         <h4 class="text-center">Your Subject</h4>
-        <div class="font-weight-bold"> Total: {{count(session()->get('teacher')->teacher)}}</div>
+        <div class="font-weight-bold"> Total: {{count($subjects)}}</div>
         <ul>
-            @foreach (session()->get('teacher')->teacher as $subject)
+            @foreach ($subjects as $subject)
                 <li class="mt-1">{{$subject->subject}}</li>
             @endforeach
         </ul>
     </div>
     <div class="scrollable-container">
         <h4 class="text-center">Exam Taken By You</h4>
-       <div class="font-weight-bold"> Total: {{count(session()->get('teacher')->examCreatedBy)}}</div>
+       <div class="font-weight-bold"> Total: {{count($exams)}}</div>
         <ul>
-            @foreach (session()->get('teacher')->examCreatedBy as $exam)
+            @foreach ($exams as $exam)
                 <li class="mt-1">{{$exam->exam_name}} of {{$exam->subject->subject}} Created On {{$exam->created_at}} Held On {{$exam->start_time}} To {{$exam->end_time}}</li>
             @endforeach
         </ul>
