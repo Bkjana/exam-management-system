@@ -1,0 +1,18 @@
+.scrollable-container {
+    /* height: 100%;  */
+    width: 50%;
+    overflow-y: auto;
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    margin: 5px;
+}
+
+/* Optional: Customize scrollbar appearance */
+.scrollable-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}

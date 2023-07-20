@@ -29,5 +29,9 @@ class Exam extends Model
         return $this->belongsToMany(User::class,'exam_student','exam_id','student_id');
     }
 
+    function createdBy(){
+        return $this->belongsTo(User::class,'created_by','id');
+    }
+
     
 }

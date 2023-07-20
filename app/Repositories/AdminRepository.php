@@ -97,6 +97,7 @@ class AdminRepository implements AdminRepoInterface
         $exam->subject_id = $_POST['subject_id'];
         $exam->start_time = $_POST['start_time'];
         $exam->end_time = $_POST['end_time'];
+        $exam->created_by = session()->get('admin')->id;
         $exam->save();
         $file_name="exam".$exam->id.".pdf";
         $file = $request->file('question_file');

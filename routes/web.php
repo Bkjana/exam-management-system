@@ -89,5 +89,9 @@ Route::group(['prefix'=>'teacher','middleware'=>['teacher']],function () {
 Route::group(['prefix'=>'student','middleware'=>['student']],function () {
     Route::get("/",[StudentController::class,'index']);
     Route::get('/logout',[StudentController::class,'logout']);
-    
+    Route::get('/subject',[StudentController::class,'subject']);
+    Route::get('/exam',[StudentController::class,'exam']);
+    Route::post('/saveAnswerPaper',[StudentController::class,'saveAnswerPaper']);
+    Route::get('/enrolledSubject/{id}',[StudentController::class,'enrolledSubject']);
+    Route::get('/enrolledExam/{id}',[StudentController::class,'enrolledExam']);
 });

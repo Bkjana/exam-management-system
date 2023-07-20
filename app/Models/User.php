@@ -33,7 +33,13 @@ class User extends Model
         return $this->belongsToMany(Subject::class,'student_subject','student_id','subject_id');
      }
 
+     function examCreatedBy(){
+         return $this->hasMany(Exam::class,'created_by','id');
+     }
+
      function teacher() {
+         //get all subject of a perticular teacher, by mistake the name is different if i changed this it give me too many headche......
+         //As i don't remember where i used this function
          return $this->hasMany(Subject::class,'assign_teacher','id');
      }
      

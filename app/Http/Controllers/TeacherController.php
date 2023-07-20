@@ -9,7 +9,6 @@ class TeacherController extends Controller
     function index() {
         return view("teacher.index");
     }
-
     function logout() {
         session()->remove('teacher');
         return view("login");
