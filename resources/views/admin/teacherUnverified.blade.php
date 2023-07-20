@@ -34,9 +34,9 @@
                     <td>{{$teacher->address}}</td>
                     {{-- <td>{{$student->exam_count}}</td> --}}
                     <td class="d-flex">
-                      <a href="{{asset('storage/pdfs/'.$teacher->id.'.pdf');}}" class="btn btn-outline-info">Show Resume</a>
+                      <a href="{{asset('storage/pdfs/'.$teacher->id.'.pdf')}}" class="btn btn-outline-info" target="-blank">Show Resume</a>
                       <a href="/admin/teacher/accept/{{$teacher->id}}" class="btn btn-outline-success">Accept</a>
-                      <a href="/admin/teacher/permanentdelete/{{$teacher->id}}" class="btn btn-outline-danger">Reject</a>
+                      <a href="/admin/teacher/delete/{{$teacher->id}}" class="btn btn-outline-danger">Reject</a>
                     </td>                    
                   </tr>
               @endforeach

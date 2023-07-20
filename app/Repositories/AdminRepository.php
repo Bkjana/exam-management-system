@@ -141,7 +141,7 @@ class AdminRepository implements AdminRepoInterface
     public function getAllTeacherFromTrashed() {
         return User::onlyTrashed()
         ->where('role','teacher')
-        ->where('name', 'not like', '%unverified%')
+        // ->where('name', 'not like', '%unverified%')
         ->withCount('teacher')->get();
     }
     public function teacherDelete($id){
