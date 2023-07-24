@@ -6,7 +6,7 @@
 
 @section('main-section')
     <x-navbar homeName="{{ session('teacher')->name }}" homeLink="/teacher" subjectLink="/teacher/subject"
-        examLink="/teacher/exam" logoutLink="/teacher/logout" />
+        examLink="/teacher/exam" logoutLink="/teacher/logout" profileLink="/teacher/profile"/>
     {{-- <div class="container m-2"> --}}
 
     @if (count($subjects) > 0)

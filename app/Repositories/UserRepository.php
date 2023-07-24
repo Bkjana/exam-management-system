@@ -10,7 +10,7 @@ class UserRepository implements UserRepoInterface
 {
    public function SaveUser(Request $request) {
         $user = new User;
-        $user->name=$_POST['name'];
+        $user->name = $_POST['name']." unverified";
         $user->email=$_POST['email'];
         $user->mobile=$_POST['mobile'];
         $user->address=$_POST['address'];
@@ -18,8 +18,6 @@ class UserRepository implements UserRepoInterface
         $user->password= $_POST['password'];
         $user->save();
         if($_POST['role']=='teacher'){
-            $user->name = $_POST['name']." unverified";
-            $user->save();
             $file_name=$user->id.".pdf";
             $file = $request->file('file');
             $file->storeAs('pdfs', $file_name,'public');

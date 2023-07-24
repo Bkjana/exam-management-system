@@ -5,7 +5,7 @@
 @endpush
 
 @section('main-section')
-<x-navbar homeName="{{session('student')->name}}" homeLink="/student" subjectLink="/student/subject" examLink="/student/exam" logoutLink="/student/logout" />
+<x-navbar homeName="{{session('student')->name}}" homeLink="/student" subjectLink="/student/subject" examLink="/student/exam" logoutLink="/student/logout" profileLink="/student/profile"/>
     <div class="container">
     @if (count($onGoingExam)>0)    
         <h3 class="text-center"><u>Current Exam...</u></h3>

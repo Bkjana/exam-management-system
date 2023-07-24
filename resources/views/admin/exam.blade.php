@@ -5,7 +5,7 @@
 @endpush
 
 @section('main-section')
-<x-navbar homeName="{{session('admin')->name}}" homeLink="/admin" subjectLink="/admin/subject" examLink="/admin/exam" logoutLink="/admin/logout" />
+<x-navbar homeName="{{session('admin')->name}}" homeLink="/admin" subjectLink="/admin/subject" examLink="/admin/exam" logoutLink="/admin/logout" profileLink="/admin/profile"/>
     <h1 class="text-center">All Exams</h1>
     <a href="/admin/exam/add" class="btn btn-outline-primary mb-1">Add New Exam</a>
     <table class="table table-striped text-center border">

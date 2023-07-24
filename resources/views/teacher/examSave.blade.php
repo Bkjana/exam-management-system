@@ -5,7 +5,7 @@
 @endpush
 
 @section('main-section')
-<x-navbar homeName="{{session('teacher')->name}}" homeLink="/teacher" subjectLink="/teacher/subject" examLink="/teacher/exam" logoutLink="/teacher/logout" />
+<x-navbar homeName="{{session('teacher')->name}}" homeLink="/teacher" subjectLink="/teacher/subject" examLink="/teacher/exam" logoutLink="/teacher/logout" profileLink="/teacher/profile"/>
   <h1 class="text-center">Teacher Dashbord</h1>
 <h4 class="text-center">Save New Exam</h4>
 <form class="container col-10 m-5 border p-3" method="POST" action="/teacher/exam" enctype="multipart/form-data">

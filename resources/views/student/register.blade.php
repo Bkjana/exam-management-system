@@ -49,13 +49,8 @@
         </span>
     </div>
 
-    <div class="form-group">
-        <label class="form-check-label" for="role" >Select Your Role:</label>
-        <select name="role" id="role" class="form-control" onchange="openPDF()" value={{ old('role') }}>
-            <option value="student">Student</option>
-            <option value="teacher">Teacher</option>
-        </select>
-    </div>
+
+    <input type="hidden" name="role" value="student">
 
 
 
@@ -78,16 +73,6 @@
             @enderror
         </span>
     </div>
-
-    <div class="form-group" id="teacher-resume">
-        <label for="exampleFormControlFile1">Upload Your Resume (as pdf less then 2MB):</label>
-        <input type="file" class="form-control-file" id="resume" name="file" value={{ old('file') }}>
-        <span class="text-danger">
-            @error('file')
-                {{ $message }}
-            @enderror
-        </span>
-      </div>
 
 
     <div class="form-group">

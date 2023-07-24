@@ -7,6 +7,7 @@ use App\Models\Subject;
 use App\Models\User;
 use App\Repositories\Interfaces\AdminRepoInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class AdminController extends Controller
 {
@@ -21,9 +22,12 @@ class AdminController extends Controller
         $arr=$this->adminRepoInterface->index();       
         return view("admin.index",['count'=>$arr]);
     }
+    function login(){
+        return view("admin.login");
+    }
     function logout() {
         session()->remove('admin');
-        return view("login");
+        return redirect("/");
     }
 
 
@@ -39,7 +43,7 @@ class AdminController extends Controller
     }
     function studentDelete($id){
         $this->adminRepoInterface->studentDelete($id);
-        return redirect("/admin/student");
+        return back();
     }
     function studentRestore($id){
         $this->adminRepoInterface->studentRestore($id);
@@ -48,6 +52,21 @@ class AdminController extends Controller
     function studentPermanentDelete($id){
         $this->adminRepoInterface->studentPermanentDelete($id);
         return redirect("/admin/student/past");
+    }
+    function studentSortAscending(){
+        $students = $this->adminRepoInterface->getAllStudentWithNumberOfSubjectAndExamSortByNameAcs();
+        $view = View::make('admin.studentTable', compact('students'))->render();
+        return response()->json($view);
+    }
+    function studentSortDescending(){
+        $students = $this->adminRepoInterface->getAllStudentWithNumberOfSubjectAndExamSortByNameDesc();
+        $view = View::make('admin.studentTable', compact('students'))->render();
+        return response()->json($view);
+    }
+    function studentSearch($search){
+        $students = $this->adminRepoInterface->studentSearch($search);
+        $view = View::make('admin.studentTable', compact('students'))->render();
+        return response()->json($view);
     }
 
 
@@ -149,7 +168,7 @@ class AdminController extends Controller
     }
     function teacherDelete($id){
         $this->adminRepoInterface->teacherDelete($id);
-        return redirect("/admin/teacher");
+        return back();
     }
     function teacherRestore($id){
         $this->adminRepoInterface->teacherRestore($id);
@@ -159,15 +178,33 @@ class AdminController extends Controller
         $this->adminRepoInterface->teacherPermanentDelete($id);
         return redirect("/admin/teacher/past");
     }
-    function teacherUnverified() {
-        $teachers = $this->adminRepoInterface->getTeacherWhoAreUnverified();
-        return view('admin.teacherUnverified',['teachers'=>$teachers]);
-    }
-
     function teacherAccept($id){
         $this->adminRepoInterface->acceptTeacher($id);
-        return redirect("/admin/teacher/unverified");
+        return back();
     }
+    function teacherSort($val){
+         $teachers = $this->adminRepoInterface->teacherSort($val);
+         return view('admin.teacher',['teachers'=>$teachers]);
+    }
+    function teacherApproved(){
+        $teachers = $this->adminRepoInterface->teacherApproded();
+        $approved = 1;
+        return view('admin.teacher',compact('teachers','approved'));
+    }
+    function teacherUnverified() {
+        $teachers = $this->adminRepoInterface->getTeacherWhoAreUnverified();
+        $approved = 0;
+        return view('admin.teacher',['teachers'=>$teachers,'approved'=>$approved]);
+    }
+    function teacherSearch($val){
+        $teachers = $this->adminRepoInterface->teacherSearch($val);
+        return view('admin.teacher',compact('teachers'));
+    }
+
+    // function teacherTableBody(){
+    //     $teachers = $this->adminRepoInterface->getAllTeacherWithNumberOfSubjectAssign();
+    //     return view('admin.teacher_table',['teachers'=>$teachers]);
+    // }
 
 
 }

@@ -29,6 +29,6 @@ class StudentMiddleware
             return $next($request);
         }
         
-        return response(view("login"));
+        return response(redirect("/"));
     }
 }

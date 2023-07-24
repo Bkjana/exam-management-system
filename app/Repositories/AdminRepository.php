@@ -25,12 +25,12 @@ class AdminRepository implements AdminRepoInterface
 
     public function getAllStudentWithNumberOfSubjectAndExam() {
         return User::where('role','student')
-        ->withCount(['exam','subject'],)->get();
+        ->withCount(['exam','subject'],)->paginate(3);
     }
     public function getAllStudentFromTrashed() {
         return User::onlyTrashed()
         ->where('role','student')
-        ->withCount(['exam','subject'],)->get();
+        ->withCount(['exam','subject'],)->paginate(3);
     }
     public function studentDelete($id){
         $student=User::find($id);
@@ -50,6 +50,25 @@ class AdminRepository implements AdminRepoInterface
             $student->forceDelete();
         }
     }
+    public function getAllStudentWithNumberOfSubjectAndExamSortByNameAcs(){
+        return User::where('role','student')
+        ->withCount(['exam','subject'])
+        ->orderBy('name')
+        ->paginate(3);
+    }
+    public function getAllStudentWithNumberOfSubjectAndExamSortByNameDesc(){
+        return User::where('role','student')
+        ->withCount(['exam','subject'])
+        ->orderBy('name','DESC')
+        ->paginate(3);
+    }
+    public function studentSearch($val){
+        return User::where('role','student')
+        ->where('name','like','%'.$val.'%')
+        ->withCount(['exam','subject'])
+        ->paginate(3);
+    }
+
 
 
 
@@ -131,8 +150,8 @@ class AdminRepository implements AdminRepoInterface
 
     public function getAllTeacherWithNumberOfSubjectAssign(){
         return User::where('role','teacher')
-        ->where('name', 'not like', '%unverified%')
-        ->withCount('teacher')->get();
+        // ->where('name', 'not like', '%unverified%')
+        ->withCount('teacher')->paginate(5);
     }
     public function getAllTeacher(){
         return User::where('role','teacher')
@@ -143,7 +162,7 @@ class AdminRepository implements AdminRepoInterface
         return User::onlyTrashed()
         ->where('role','teacher')
         // ->where('name', 'not like', '%unverified%')
-        ->withCount('teacher')->get();
+        ->withCount('teacher')->paginate(5);
     }
     public function teacherDelete($id){
         $teacher=User::find($id);
@@ -163,16 +182,42 @@ class AdminRepository implements AdminRepoInterface
             $teacher->forceDelete();
         }
     }
-    public function getTeacherWhoAreUnverified(){
-        return User::where('role','teacher')
-        ->where('name', 'like', '%unverified%')
-        ->get();
-    }
-
     public function acceptTeacher($id){
         $user = User::find($id);
         $user->name = str_replace('unverified','',$user->name);
         $user->save();
+    }
+    public function teacherSort($val){
+        if($val=='nameUp'){
+            return User::where('role','teacher')
+            ->withCount('teacher')
+            ->orderBy('name')
+            ->paginate(5);
+        }
+        else if($val=='nameDown'){
+            return User::where('role','teacher')
+            ->withCount('teacher')
+            ->orderBy('name','DESC')
+            ->paginate(5);
+        }
+    }
+    public function teacherApproded(){
+        return User::where('role','teacher')
+        ->where('name', 'not like', '%unverified%')
+        ->withCount('teacher')
+        ->paginate(5);
+    }
+    public function getTeacherWhoAreUnverified(){
+        return User::where('role','teacher')
+        ->where('name', 'like', '%unverified%')
+        ->withCount('teacher')
+        ->paginate(5);
+    }
+    public function teacherSearch($val){
+        return User::where('role','teacher')
+        ->where('name', 'like', '%'.$val.'%')
+        ->withCount('teacher')
+        ->paginate(5);
     }
 
 

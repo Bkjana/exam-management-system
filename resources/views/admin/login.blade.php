@@ -17,18 +17,8 @@
                 {{ $message }}
             @enderror
         </span>
-        <div class="form-group">
-            <label class="form-check-label" for="role">Select Your Role:</label>
-            <select name="role" id="role" class="form-control">
-                <option value="student">Student</option>
-                <option value="teacher">Teacher</option>
-            </select>
-            <span class="text-danger">
-                @error('role')
-                    {{ $message }}
-                @enderror
-            </span>
-        </div>
+
+        <input type="hidden" name="role" value="admin">
         <div class="form-group">
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" placeholder="Password" name="password">

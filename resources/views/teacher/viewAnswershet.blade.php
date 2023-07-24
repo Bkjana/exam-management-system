@@ -6,7 +6,7 @@
 
 @section('main-section')
     <x-navbar homeName="{{ session('teacher')->name }}" homeLink="/teacher" subjectLink="/teacher/subject"
-        examLink="/teacher/exam" logoutLink="/teacher/logout" />
+        examLink="/teacher/exam" logoutLink="/teacher/logout" profileLink="/teacher/profile"/>
     @if (count($answerFiles)==0)
         <h3 class="text-center text-danger">There Is No File</h3>
     @else

@@ -14,8 +14,12 @@ class UserController extends Controller
         $this->userRepoInterface = $userRepoInterface;
     }
 
-    function login() {
-        return view("login");
+    function index() {
+        return view("index");
+    }
+
+    function login(){
+        return view('login');
     }
 
     function loginCheck(Request $request) {
@@ -61,9 +65,10 @@ class UserController extends Controller
         if($_POST['role']=='teacher'){
             $request->validate([
                 'file' => 'required|mimes:pdf|max:2048',
+                'subject' => 'required'
             ]);
         }
         $this->userRepoInterface->SaveUser($request);
-        return view("login");
+        return redirect("/");
     }
 }

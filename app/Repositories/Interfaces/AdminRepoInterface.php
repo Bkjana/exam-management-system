@@ -13,6 +13,9 @@ interface AdminRepoInterface{
     public function studentDelete($id);
     public function studentRestore($id);
     public function studentPermanentDelete($id);
+    public function getAllStudentWithNumberOfSubjectAndExamSortByNameAcs();
+    public function getAllStudentWithNumberOfSubjectAndExamSortByNameDesc();
+    public function studentSearch($val);
 
 
 
@@ -41,6 +44,9 @@ interface AdminRepoInterface{
     public function teacherPermanentDelete($id);
     public function getTeacherWhoAreUnverified();
     public function acceptTeacher($id);
+    public function teacherSort($val);
+    public function teacherApproded();
+    public function teacherSearch($val);
 
 
 }

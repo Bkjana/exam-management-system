@@ -18,9 +18,12 @@ class StudentController extends Controller
         $upcomigExamsThatAreNotEnrolled = $this->studentRepoInterface->upcomingExamOfStudent();
         return view("student.index",['notEnrolledSubjects'=>$notEnrolledSubject,'upcomigExamsThatAreNotEnrolled'=>$upcomigExamsThatAreNotEnrolled]);
     }
+    function resgister(){
+        return view("student.register");
+    }
     function logout() {
         session()->remove('student');
-        return view("login");
+        return redirect("/");
     }
     function subject() {
         $Carbon=new Carbon;

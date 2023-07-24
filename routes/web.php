@@ -21,13 +21,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[UserController::class,'login']);
-Route::post('/',[UserController::class,'loginCheck']);
+Route::get('/',[UserController::class,'index']);
+Route::get('/login',[UserController::class,'login']);
+Route::post('/login',[UserController::class,'loginCheck']);
 Route::get('/register',[UserController::class,'register']);
 Route::post('/register',[UserController::class,'registerSave']);
 
 
 
+Route::get('/admin/login',[AdminController::class,'login']);
 Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
 
 
@@ -42,6 +44,9 @@ Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
         Route::get('/restore/{id}',[AdminController::class,'studentRestore']);
         Route::get('/permanentdelete/{id}',[AdminController::class,'studentPermanentDelete']);
         Route::get('/delete/{id}',[AdminController::class,'studentDelete']);
+        Route::get('/studentSortAscending',[AdminController::class,'studentSortAscending']);
+        Route::get('/studentSortDescending',[AdminController::class,'studentSortDescending']);
+        Route::get('/studentSearch/{search}',[AdminController::class,'studentSearch']);
     });
 
 
@@ -70,8 +75,13 @@ Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
         Route::get('/restore/{id}',[AdminController::class,'teacherRestore']);
         Route::get('/permanentdelete/{id}',[AdminController::class,'teacherPermanentDelete']);
         Route::get('/delete/{id}',[AdminController::class,'teacherDelete']);
-        Route::get('/unverified',[AdminController::class,'teacherUnverified']);
+        // Route::get('/unverified',[AdminController::class,'teacherUnverified']);
         Route::get('/accept/{id}',[AdminController::class,'teacherAccept']);
+        Route::get('/sort/{val}',[AdminController::class,'teacherSort']);
+        Route::get('/approved',[AdminController::class,'teacherApproved']);
+        Route::get('/disapproved',[AdminController::class,'teacherUnverified']);
+        Route::get('/teacherSearch/{val}',[AdminController::class,'teacherSearch']);
+        // Route::get('/teacher_table',[AdminController::class,'teacherTableBody']);
     });
 
 
@@ -79,6 +89,7 @@ Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
 });
 
 
+Route::get('/teacher/register',[TeacherController::class,'register']);
 Route::group(['prefix'=>'teacher','middleware'=>['teacher']],function () {
     Route::get("/",[TeacherController::class,'index']);
     Route::get('/logout',[TeacherController::class,'logout']);
@@ -89,6 +100,7 @@ Route::group(['prefix'=>'teacher','middleware'=>['teacher']],function () {
 });
 
 
+Route::get('/student/register',[StudentController::class,'resgister']);
 Route::group(['prefix'=>'student','middleware'=>['student']],function () {
     Route::get("/",[StudentController::class,'index']);
     Route::get('/logout',[StudentController::class,'logout']);

@@ -5,7 +5,7 @@
 @endpush
 
 @section('main-section')
-    <x-navbar homeName="{{session('admin')->name}}" homeLink="/admin" subjectLink="/admin/subject" examLink="/admin/exam" logoutLink="/admin/logout" />
+    <x-navbar homeName="{{session('admin')->name}}" homeLink="/admin" subjectLink="/admin/subject" examLink="/admin/exam" logoutLink="/admin/logout" profileLink="/admin/profile"/>
 
         <h3 class="text-center mt-2 mb-2 border-top border-bottom border-secondary p-2 rounded table-hover">Admin Dashboard</h3>
         <div class="row m-3">

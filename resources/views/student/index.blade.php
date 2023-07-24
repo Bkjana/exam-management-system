@@ -5,7 +5,7 @@
 @endpush
 
 @section('main-section')
-    <x-navbar homeName="{{session('student')->name}}" homeLink="/student" subjectLink="/student/subject" examLink="/student/exam" logoutLink="/student/logout" />
+    <x-navbar homeName="{{session('student')->name}}" homeLink="/student" subjectLink="/student/subject" examLink="/student/exam" logoutLink="/student/logout" profileLink="/student/profile"/>
         <h1 class="text-center">Student Dashbord</h1>
         <div class="d-flex justify-content-between">
             <div class="scrollable-container" style="max-height: 500px">

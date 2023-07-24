@@ -19,10 +19,13 @@ class TeacherController extends Controller
         $exams = $this->teacherRepoInterface->getExamOfTeacher();
         return view("teacher.index", compact('subjects', 'exams'));
     }
+    function register(){
+        return view("teacher.register");
+    }
     function logout()
     {
         session()->remove('teacher');
-        return view("login");
+        return redirect("/");
     }
     function examView()
     {
