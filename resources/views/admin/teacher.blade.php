@@ -28,30 +28,22 @@
             <tr>
                 <th scope="col">Teacher Id</th>
                 <th scope="col" class="d-flex justify-content-between">
+                    {{-- <div class="flex-column d-flex justify-content-between"> --}}
+                    <ion-icon name="caret-up-circle-outline" id="teacherNameUp"></ion-icon>
                     <div>Name</div>
-                    <div class="flex-column d-flex justify-content-between">
-                        <ion-icon name="caret-up-circle-outline" id="teacherNameUp"></ion-icon>
-                        <ion-icon name="caret-down-circle-outline" id="teacherNameDown"></ion-icon>
-                    </div>
+                    <ion-icon name="caret-down-circle-outline" id="teacherNameDown"></ion-icon>
+                    {{-- </div> --}}
                 </th>
                 <th scope="col">Email</th>
                 <th scope="col">Mobile</th>
                 <th scope="col">Address</th>
                 <th scope="col">Subject Assign</th>
                 <th scope="col" class="d-flex justify-content-center">
-                    <div>Action</div>
-                    <div class="flex-column d-flex justify-content-between font-weight-light">
-                        <div><input type="radio" name="same" id="teacherApprovedList" 
-                            @if (isset($approved) && $approved==1)
-                                checked
-                            @endif
-                        >Approved</div>
-                        <div><input type="radio" name="same" id="teacherDisapprovedList"
-                            @if (isset($approved) && $approved==0)
-                                checked
-                            @endif
-                            >Dispproved</div>
-                    </div>
+                    {{-- < class="flex-column d-flex justify-content-between font-weight-light"> --}}
+                        <input type="radio" name="same" id="teacherApprovedList" @if (isset($approved) && $approved==1) checked @endif> <span class="font-weight-light">Approved</span>
+                            <div>Action</div>
+                        <input type="radio" name="same" id="teacherDisapprovedList" @if (isset($approved) && $approved==0) checked @endif><span class="font-weight-light">Dispproved</span>
+                    {{-- </div> --}}
                 </th>
             </tr>
         </thead>

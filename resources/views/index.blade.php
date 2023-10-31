@@ -29,7 +29,7 @@
         }
 
         .advantages {
-            margin-top: 30px;
+            margin-top: 15px;
         }
 
         .advantages img {
@@ -40,6 +40,7 @@
 </head>
 
 <body>
+
     <!-- Jumbotron Header -->
     <div class="jumbotron text-center">
         <h1 class="display-4">Exam Management System</h1>
@@ -57,7 +58,7 @@
                         <a href="/student/register">Student Register here</a>
                         <a href="/teacher/register">Teacher Register here</a>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -78,8 +79,49 @@
                 </ul>
                 <a href="/admin/login" class="btn btn-success">Admin Login</a>
             </div>
-            <div class="col-md-6">
-                <img src="{{asset('storage/online-exam.jpeg')}}" alt="Exam Management System" class="img-fluid">
+            <div class="col-md-6 container border">
+                <h2>Contact Us</h2>
+                <form action="/contact" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name" name="contact_name" value="{{old('contact_name')}}">
+                        <span class="text-danger">
+                            @error('contact_name')
+                                {{$message}}
+                            @enderror
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email" name="contact_email" value="{{old('contact_email')}}">
+                        <span class="text-danger">
+                            @error('contact_email')
+                                {{$message}}
+                            @enderror
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" class="form-control" id="subject" placeholder="Enter subject" name="contact_subject" value="{{old('contact_subject')}}">
+                        <span class="text-danger">
+                            @error('contact_subject')
+                                {{$message}}
+                            @enderror
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea class="form-control" id="message" rows="2" placeholder="Enter your message" name="contact_message">
+                        </textarea>
+                        <span class="text-danger">
+                            @error('contact_message')
+                                {{$message}}
+                            @enderror
+                        </span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
         </div>
     </div>

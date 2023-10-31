@@ -109,6 +109,7 @@ $(document).ready(function () {
 
         //sort student using name ascending order
         $("#studentNameUp").click(function () {
+            console.log("click");
             $.ajax({
                 url: "/admin/student/studentSortAscending",
                 dataType: 'json',
@@ -129,6 +130,7 @@ $(document).ready(function () {
 
         //sort student using name descending order
         $("#studentNameDown").click(function () {
+            console.log("click");
             $.ajax({
                 url: "/admin/student/studentSortDescending",
                 dataType: 'json',

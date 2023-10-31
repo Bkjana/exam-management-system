@@ -6,8 +6,8 @@
             <th scope="col">
                 Name
                 <div class="d-flex justify-content-between">
-                    <ion-icon name="caret-up-circle-outline" id="studentNameUp"></ion-icon>
-                    <ion-icon name="caret-down-circle-outline" id="studentNameDown"></ion-icon>
+                   <a href="javascript:void(0)" id="studentNameUp"> <ion-icon name="caret-up-circle-outline" ></ion-icon></a>
+                    <a href="javascript:void(0)" id="studentNameDown"><ion-icon name="caret-down-circle-outline" ></ion-icon></a>
                 </div>
             </th>
             <th scope="col">Email</th>

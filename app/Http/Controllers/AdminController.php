@@ -54,6 +54,7 @@ class AdminController extends Controller
         return redirect("/admin/student/past");
     }
     function studentSortAscending(){
+        
         $students = $this->adminRepoInterface->getAllStudentWithNumberOfSubjectAndExamSortByNameAcs();
         $view = View::make('admin.studentTable', compact('students'))->render();
         return response()->json($view);

@@ -26,10 +26,14 @@ Route::get('/login',[UserController::class,'login']);
 Route::post('/login',[UserController::class,'loginCheck']);
 Route::get('/register',[UserController::class,'register']);
 Route::post('/register',[UserController::class,'registerSave']);
+Route::post('/contact',[UserController::class,'contact']);
+Route::view('/studentQualification','studentQualification');
+Route::post('/studentQualification',[UserController::class,'studentQualification']);
 
 
 
 Route::get('/admin/login',[AdminController::class,'login']);
+Route::view('/admin/teacher_table','admin.teacher_table');
 Route::group(['prefix'=>'admin','middleware'=>['admin']],function () {
 
 
